@@ -20,19 +20,17 @@ void main() async {
     anonKey: 'sb_publishable_rPxe26D7c_wmzm1LPozSQg_497I2itS',
   );
 
-  // LISTENER para detectar recuperación de contraseña
   Supabase.instance.client.auth.onAuthStateChange.listen((data) {
     final event = data.event;
-    print('🔐 Auth Event: $event'); // Debug
+    print('Auth Event: $event');
 
     if (event == AuthChangeEvent.passwordRecovery) {
-      print('✅ Password Recovery detectado, navegando a ResetPasswordScreen');
+      print('Password Recovery detectado, navegando a ResetPasswordScreen');
 
-      // Delay pequeño para asegurar que la app ya está renderizada
       Future.delayed(const Duration(milliseconds: 500), () {
         navigatorKey.currentState?.pushNamedAndRemoveUntil(
           ResetPasswordScreen.routeName,
-          (route) => false, // elimina todas las rutas anteriores
+          (route) => false,
         );
       });
     }
@@ -66,7 +64,7 @@ class vuelaFacil extends StatelessWidget {
         ResetPasswordScreen.routeName: (_) => const ResetPasswordScreen(),
         RegisterScreen.routeName: (_) => const RegisterScreen(),
       },
-      // Fallback para deep links
+
       onGenerateRoute: (settings) {
         print('🔗 onGenerateRoute: ${settings.name}');
 
@@ -74,7 +72,6 @@ class vuelaFacil extends StatelessWidget {
           return MaterialPageRoute(builder: (_) => const ResetPasswordScreen());
         }
 
-        // Ruta desconocida → login
         return MaterialPageRoute(builder: (_) => const LoginScreen());
       },
     );

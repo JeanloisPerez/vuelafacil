@@ -33,7 +33,7 @@ class _FlightListScreenState extends State<FlightListScreen> {
   DateTime? fechaVuelta;
   late bool soloIda;
 
-  bool _hasArgs = false; // <-- nuevo flag
+  bool _hasArgs = false;
   bool _initializedArgs = false;
 
   String _filtroSeleccionado = "precio";
@@ -61,7 +61,6 @@ class _FlightListScreenState extends State<FlightListScreen> {
           : null;
       soloIda = routeArgs["soloIda"] == true;
     } else {
-      // No vienen args (por ejemplo se navegó desde saved flights). Evitamos crash.
       _hasArgs = false;
     }
   }
@@ -191,7 +190,6 @@ class _FlightListScreenState extends State<FlightListScreen> {
                 const SizedBox(height: 12),
                 ElevatedButton(
                   onPressed: () {
-                    // Volver a la pantalla raíz (no depende de rutas registradas)
                     Navigator.of(context).popUntil((r) => r.isFirst);
                   },
                   child: const Text("Ir al buscador"),

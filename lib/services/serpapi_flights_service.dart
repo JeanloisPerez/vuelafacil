@@ -17,9 +17,6 @@ class SerpApiFlightsService {
 
   DateTime _normalize(DateTime d) => DateTime(d.year, d.month, d.day);
 
-  // --------------------------------------------------------------------------
-  // 🔎 BUSQUEDA DE VUELOS
-  // --------------------------------------------------------------------------
   Future<List<Map<String, dynamic>>> searchFlights({
     required String departureId,
     required String arrivalId,
@@ -195,7 +192,7 @@ class SerpApiFlightsService {
     final uri = Uri.https("serpapi.com", "/search.json", {
       "engine": "google_flights",
       "q": query,
-      "type": "2", // airport search
+      "type": "2",
       "hl": "en",
       "api_key": apiKey,
     });

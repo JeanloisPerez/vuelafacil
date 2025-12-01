@@ -5,7 +5,6 @@ import '../models/flight_model.dart';
 class FlightStorage {
   static const String key = "saved_flights";
 
-  // Guarda o actualiza si el vuelo ya existe (por id)
   static Future<void> saveFlight(FlightModel flight) async {
     try {
       final prefs = await SharedPreferences.getInstance();
@@ -33,9 +32,7 @@ class FlightStorage {
 
       final newStored = list.map((m) => jsonEncode(m)).toList();
       await prefs.setStringList(key, newStored);
-    } catch (_) {
-      // opcional: log
-    }
+    } catch (_) {}
   }
 
   static Future<List<FlightModel>> getFlights() async {
@@ -57,7 +54,6 @@ class FlightStorage {
     }
   }
 
-  // Borra por índice (mantengo para compatibilidad)
   static Future<void> deleteFlight(int index) async {
     try {
       final prefs = await SharedPreferences.getInstance();
@@ -66,12 +62,9 @@ class FlightStorage {
         stored.removeAt(index);
         await prefs.setStringList(key, stored);
       }
-    } catch (_) {
-      // opcional: log
-    }
+    } catch (_) {}
   }
 
-  // Borra por id (más fiable que índice)
   static Future<void> deleteFlightById(dynamic id) async {
     if (id == null) return;
     try {
@@ -90,9 +83,7 @@ class FlightStorage {
       list.removeWhere((m) => m['id'] == id);
       final newStored = list.map((m) => jsonEncode(m)).toList();
       await prefs.setStringList(key, newStored);
-    } catch (_) {
-      // opcional: log
-    }
+    } catch (_) {}
   }
 
   static Future<void> clearAll() async {

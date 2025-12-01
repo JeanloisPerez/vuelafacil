@@ -2,8 +2,8 @@ class FlightModel {
   final dynamic id;
   final String origen;
   final String destino;
-  final String? origenCodigo; // nuevo
-  final String? destinoCodigo; // nuevo
+  final String? origenCodigo;
+  final String? destinoCodigo;
   final String? aerolinea;
   final String? vuelo;
   final String salida;

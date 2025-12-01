@@ -101,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: TextStyle(
                           fontSize: 32,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white, // el shader pinta esto
+                          color: Colors.white,
                           shadows: [
                             Shadow(
                               color: Colors.black12,

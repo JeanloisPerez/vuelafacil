@@ -4,7 +4,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 class ProfileServiceSupabase {
   final SupabaseClient supabase = Supabase.instance.client;
 
-  /// Obtiene el perfil del usuario logueado.
   Future<Map<String, dynamic>?> getProfile() async {
     final user = supabase.auth.currentUser;
     if (user == null) return null;
@@ -18,7 +17,6 @@ class ProfileServiceSupabase {
     return response;
   }
 
-  /// Guarda o actualiza el perfil del usuario.
   Future<void> saveProfile({
     required String name,
     required String phone,
@@ -37,8 +35,6 @@ class ProfileServiceSupabase {
     });
   }
 
-  /// Sube una imagen al bucket profile_images
-  /// y devuelve la URL pública resultante.
   Future<String?> uploadProfileImage(String filePath) async {
     final user = supabase.auth.currentUser;
     if (user == null) return null;
@@ -60,13 +56,11 @@ class ProfileServiceSupabase {
       final publicUrl = supabase.storage.from(bucket).getPublicUrl(fileName);
       return publicUrl;
     } catch (e) {
-      // Manejo seguro: si el bucket no existe o hay otro error, lo logueamos y devolvemos null
       print('Error uploading to storage (bucket=$bucket): $e');
       return null;
     }
   }
 
-  /// Elimina la imagen del usuario (manejo seguro)
   Future<bool> deleteProfileImage() async {
     final user = supabase.auth.currentUser;
     if (user == null) return false;
