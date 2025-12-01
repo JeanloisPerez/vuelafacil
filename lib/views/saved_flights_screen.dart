@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// ignore: depend_on_referenced_packages
 import 'package:url_launcher/url_launcher.dart';
 import '../services/flight_storage.dart';
 import '../services/serpapi_flights_service.dart';
